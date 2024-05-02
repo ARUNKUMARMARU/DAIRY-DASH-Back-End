@@ -12,7 +12,7 @@ const userController = {
             const exists = await userModel.findOne({email});
             if(exists){
                 
-              return res.json({message : "This Email Was Already Exists", user :null})
+              return res.json({status : 500, message : "This Mail Id Was Already Exists"})
                 
             }
             const passwordHash = await bcrypt.hash(password, 10);
@@ -28,7 +28,7 @@ const userController = {
             
            const saveduser =  await newUser.save();
           
-            res.json({message:'Registration Compleated',user:saveduser})
+            res.json({status : 200, message:'Registration Compleated',user:saveduser})
             
         }catch(error){
             res.status(500).json({message:error.message})
